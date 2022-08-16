@@ -1,0 +1,26 @@
+.field{
+    border: solid black 2px ;
+}
+
+.field td{
+    border:solid black 2px ;
+    height:25px ;
+    width:25px ;
+}
+
+.start {
+    background-color: aqua;
+}
+
+.correct {
+    background-color: tomato;
+}
+
+.end{
+    background-color:green ;
+}
+
+.wrong{
+    background-color:pink ;
+}
+
