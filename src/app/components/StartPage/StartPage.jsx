@@ -32,6 +32,8 @@ export default function StartPage() {
                 Количество ходов (не менее 1) :
                 <input value={steps} onChange={(e) => setSteps(e.target.value)} />
             </span>
+            <p>Правила игры :</p>
+            <p> Необходимо на поле , мысленно следуя шагам от старта (отмеченая клетка) наити финиш</p>
         </div>
         <button className = {styles.startBtn} onClick={() => handler(side, steps, setDifficulty)}>Начать</button>
     </div>
