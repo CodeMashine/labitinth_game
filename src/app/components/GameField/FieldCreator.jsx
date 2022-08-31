@@ -1,54 +1,72 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux/es/exports";
-import { gameOver } from "../../slices/gameOptionSlice" ;
-import styles from "../../components/gameStyle.module.css" ;
+import { gameOver } from "../../slices/gameOptionSlice";
+import styles from "../../components/gameStyle.module.css";
 // import StartPage from "../StartPage/StartPage";
 
 
 export default function FieldCreator(props) {
     const [data, setData] = useState(props.data);
-    const dispatch = useDispatch() ;
+    const [listener , setListener] = useState(true) ;
+    
+    let setGameResult = props.setGameResult;
+    
+    const dispatch = useDispatch();
 
 
-    function CheckResult(num, data, setData) {   /// можно попытаться и сделать несколько попыток
+    function CheckResult(num, data, setData , setGameResult = false) {   /// можно попытаться и сделать несколько попыток
         let newData = Object.assign([], data);
-        setData(newData.map(row => {
+
+        let result = newData.map(row => {
             return row.map(cell => {
+                if (cell.num === num) {
+                    cell = { ...cell, isChoose: true };
+                } 
                 if (cell.isEnd) {
-                    return { ...cell, show: true }
-                } else {
-                    if (cell.num === num) return { ...cell, isChoose: true };
-                    // return { ...cell, isChoose: false };
-                    return cell;
+                    cell = { ...cell, show: true };
                 }
-                
-
-
+              return cell;
             })
-        }))
+        })
+        setData(result) ;
 
-        // if(endPoint === num) console.log('you win')
+        checkWin(result , setGameResult) ;
+
+        setListener(false) ;
     }
 
-    let table = <table className = {styles.field}>
+    function checkWin(data , setGameResult){
+        const copy = Object.assign([], data);
+        const stack = copy.flat();
+        let result = stack.find(item => (item.isChoose === true&&item.isEnd===true));
+        result ? setGameResult("You Win") : setGameResult("You Lose") ;
+    }
+    
+
+
+    let table = <table className={styles.field}>
         <tbody>
             {data.map((row, rowIndex) => {
                 return <tr key={`${rowIndex}row`}>
                     {row.map((cell, cellIndex) => {
                         let classList = [];
                         if (cell.isStart) classList.push(`${styles.start}`);
-                        if (cell.isChoose) classList.push(`${styles.chosen}`);
+                        // if (cell.show||(cell.isChoose&&cell.show)) {
+                            // classList.push(`${styles.show}`) ;
+                        // }else 
+                        if (cell.isChoose)  classList.push(`${styles.chosen}`);
+
+                        if (cell.show) classList.push(`${styles.show}`) ;
                         // if (cell.isEnd) classList.push("end");
-                        if (cell.show) classList.push(`${styles.show}`);
 
                         return <td key={`${rowIndex}row${cellIndex}cell`} className={classList.join(' ')}
-                            onClick={() => {
-                                CheckResult(cell.num, data, setData);
-
-                                setTimeout(()=>{
-                                    dispatch(gameOver(true)) ;
-                                } , 2000)
-                            }}
+                            onClick = {listener?() => {
+                                    CheckResult(cell.num, data, setData , setGameResult );
+                                    setTimeout(() => {
+                                        dispatch(gameOver(true));
+                                    }, 2000)
+                                }:null 
+                            }
                         >
                             {/* {cell.num} */}
                         </td>

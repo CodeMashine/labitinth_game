@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit' ;
 
 const initialState = {
     side: 3 ,
-    steps: 10 ,
+    steps: 1 ,
     isEnd:true,
 }
 
@@ -12,37 +12,57 @@ export const gameOptionSlice = createSlice({
     initialState ,
     reducers: {
       setDifficulty: (state , action) => {
-        state.side = action.payload ;
         if (action.payload[0]<=0) action.payload[0]=1 ;
         if (action.payload[1]<=0) action.payload[1]=1 ;
         state.side = action.payload[0] ;
         state.steps = action.payload[1]
-        // return {...state , side :action.payload[0] , steps:action.payload[1]}
+      },
+      changeSide: (state , action)=>{
+        if (action.payload === "increase"){
+          if (state.side === 15){
+            state.side = 3 ;
+          }else{
+            state.side = state.side+1 ;
+          }
+        }
+
+        if (action.payload === "decrease"){
+          if(state.side===3){
+            state.side = 15 ;
+          }else {
+            state.side = state.side-1 ;
+          }
+        }
+
       },
 
+      changeSteps:(state , action)=>{
+        if (action.payload === "increase"){
+          if (state.steps === 15){
+            state.steps = 1 ;
+          }else{
+            state.steps = state.steps+1 ;
+          }
+        }
+
+        if (action.payload === "decrease"){
+          if(state.steps===1){
+            state.steps = 15 ;
+          }else {
+            state.steps = state.steps-1 ;
+          }
+        }
+      },
+
+
       gameOver: (state , action) => {
-        return {...state , isEnd:action.payload}
+        // return {...state , isEnd:action.payload}
+        state.isEnd = action.payload ;
       }
-      // decrementSide: (state) => {
-      //   if (state.side  === 1){
-      //       return ;
-      //   }else{
-      //       state.side -=1 ;
-      //   } 
-      // },
-      // incrementStep:(state)=>{
-      //   state.steps +=1 ;
-      // } ,
-      // decrementSteps:(state)=>{
-      //   if (state.steps === 1){
-      //    return ;
-      //   }else{
-      //       state.steps -=1 ;
-      //   } 
-      // }
+
     },
   })
   
-  export const { setDifficulty , gameOver } = gameOptionSlice.actions
+  export const { setDifficulty , changeSide , changeSteps , gameOver } = gameOptionSlice.actions
   
   export default gameOptionSlice.reducer

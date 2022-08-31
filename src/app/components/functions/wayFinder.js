@@ -1,6 +1,5 @@
 export default function wayFinder(array, steps, side) {
     const copy = Object.assign([], array);
-    // console.log(side) ;
     const stack = copy.flat();
     let point = Object.assign({}, stack.find(item => item.isStart));
     let way = [];
