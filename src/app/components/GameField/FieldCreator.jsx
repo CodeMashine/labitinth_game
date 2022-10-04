@@ -44,31 +44,28 @@ export default function FieldCreator(props) {
     
 
 
-    let table = <table className={styles.field}>
+    let table = <table className = {`table-fixed h-full w-[100%]  border-[3px] border-separate border-spacing-[1rem]`}>
         <tbody>
             {data.map((row, rowIndex) => {
                 return <tr key={`${rowIndex}row`}>
                     {row.map((cell, cellIndex) => {
-                        let classList = [];
+                        let classList = ["border-[15px]"];
                         if (cell.isStart) classList.push(`${styles.start}`);
-                        // if (cell.show||(cell.isChoose&&cell.show)) {
-                            // classList.push(`${styles.show}`) ;
-                        // }else 
                         if (cell.isChoose)  classList.push(`${styles.chosen}`);
 
                         if (cell.show) classList.push(`${styles.show}`) ;
-                        // if (cell.isEnd) classList.push("end");
 
-                        return <td key={`${rowIndex}row${cellIndex}cell`} className={classList.join(' ')}
-                            onClick = {listener?() => {
+                        return <td key={`${rowIndex}row${cellIndex}cell`} 
+                        className={`${classList.join(' ')}`}
+                            onClick = {listener ? () => {
                                     CheckResult(cell.num, data, setData , setGameResult );
                                     setTimeout(() => {
                                         dispatch(gameOver(true));
                                     }, 2000)
-                                }:null 
+                                }
+                                : null 
                             }
                         >
-                            {/* {cell.num} */}
                         </td>
                     })}
                 </tr>
@@ -77,5 +74,10 @@ export default function FieldCreator(props) {
         </tbody>
     </table>
 
-    return table;
+    return (
+        <div className = {`w-[80%] h-[60%]`}>
+            {table}
+        </div>
+
+    ) ;
 }

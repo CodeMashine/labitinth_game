@@ -6,6 +6,8 @@ export default function RoadSign(props) {
 
     const gameResult = props.gameResult;
     
+    let output ;
+
     if (gameResult === "in Process") {
         let way = props.way;
         let timer = setTimeout(() => {
@@ -22,17 +24,13 @@ export default function RoadSign(props) {
             // clearTimeout(timer);
         // }
 
-        return (<div>
-            <h2>
-                {sign}
-            </h2>
-        </div>)
+        output = sign ;
     } else {
-        return (<div>
-            <h2>
-                {gameResult}
-            </h2>
-        </div>)
+        output = gameResult ;
 
     }
+
+    return  <div className = {`text-7xl font-extrabold mb-[2rem] `}>
+        {output}
+    </div>
 }

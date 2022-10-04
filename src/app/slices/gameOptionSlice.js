@@ -5,6 +5,7 @@ const initialState = {
     side: 3 ,
     steps: 1 ,
     isEnd:true,
+    // isEnd:false,
 }
 
 export const gameOptionSlice = createSlice({

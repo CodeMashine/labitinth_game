@@ -1,72 +1,70 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { PlusCircleIcon, MinusCircleIcon , PlayIcon } from '@heroicons/react/outline'
+import { PlusCircleIcon, MinusCircleIcon, ChevronDownIcon } from '@heroicons/react/outline'
 
-import {changeSide,changeSteps, gameOver } from "../../slices/gameOptionSlice";
-import styles from "../gameStyle.module.css";
+import { changeSide, changeSteps, gameOver } from "../../slices/gameOptionSlice";
 
 export default function StartPage() {
     let sideStore = useSelector(state => state.gameOption.side);
     let stepsStore = useSelector(state => state.gameOption.steps);
     const dispatch = useDispatch();
 
-    return <div className="flex flex-col mx-auto w-6/12 mt-10 ">
-            
-            {/* <h2 className ="font-semibold text-2xl font-sans">Добро пожаловать в игру для развития памяти и внимания</h2> */}
-            <h2 className ="font-semibold text-2xl font-sans tracking-widest">Лабиринт</h2>
+    const [listVisible, setListVisible] = useState(false);
 
-        <div className = "mt-3">
-        <h2 className ="text-xl font-sans tracking-widest underline">Задайте сложность игры</h2>
+    return <div className="flex items-start flex-col mx-auto w-[80%] h-[60%] mt-10 ">
 
-            <div className = "mt-3">
-            <span className = "flex space-x-4 items-center">
-                    <span className="cursor-help" title="(не менее 3 и не более 15)">
-                    Сторона поля :
+        <h2 className="font-bold text-8xl font-sans tracking-widest">Лабиринт</h2>
+
+        <div className="mt-[5rem]">
+            <h2 className="text-5xl font-sans tracking-widest underline">Задайте сложность игры</h2>
+
+            <div className="mt-[3rem]">
+                <span className="flex space-x-10 items-center">
+                    <span className="cursor-help text-5xl" title="(не менее 3 и не более 15)">
+                        Сторона поля :
                     </span>
-                    {/* <button className="rounded-lg border ring-inset-2 ring-1 bg-teal-500 w-4 h-4"  */}
-                    {/* <button className="rounded-full border ring-inset-2 ring-1 bg-teal-500 w-6 h-6"  */}
-                    {/* onClick = {()=>dispatch(changeSide("decrease"))} >-</button> */}
-                    {/* <button className="rounded-full w-5 h-5 bg-secondary text-base-100 mx-2" */}
-                    <button className="rounded-full w-5 h-5"
-                    onClick = {()=>dispatch(changeSide("decrease"))}>
-                    <MinusCircleIcon />
+                    <button className="rounded-full w-[5rem] h-[5rem]"
+                        onClick={() => dispatch(changeSide("decrease"))}>
+                        <MinusCircleIcon />
                     </button>
-                    <span>{sideStore}</span>
-                    <button className="rounded-full w-5 h-5" 
-                    onClick = {()=>dispatch(changeSide("increase"))} >
-                         <PlusCircleIcon /> 
-                         </button>
+                    <span className = "text-5xl" >{sideStore}</span>
+                    <button className="rounded-full w-[5rem] h-[5rem]"
+                        onClick={() => dispatch(changeSide("increase"))} >
+                        <PlusCircleIcon />
+                    </button>
                 </span>
             </div>
-            <div>
-                <span className = "flex space-x-4 items-center">
-                    <span className="cursor-help"  title="(не менее 1 и не более 15)">
-                    Количество ходов :
+            <div className="mt-[3rem]" >
+                <span className="flex space-x-10 items-center">
+                    <span className="cursor-help text-5xl" title="(не менее 1 и не более 15)">
+                        Количество ходов :
                     </span>
-                    <button className="rounded-full w-5 h-5" 
-                    onClick = {()=>dispatch(changeSteps("decrease"))}>
-                    <MinusCircleIcon />
-                        </button>
-                    <span>{stepsStore}</span>
-                    <button className="rounded-full w-5 h-5" 
-                    onClick = {()=>dispatch(changeSteps("increase"))}>
-                         <PlusCircleIcon />
-                        </button>
+                    <button className="rounded-full w-[5rem] h-[5rem]"
+                        onClick={() => dispatch(changeSteps("decrease"))}>
+                        <MinusCircleIcon />
+                    </button>
+                    <span className = "text-5xl" >{stepsStore}</span>
+                    <button className="rounded-full w-[5rem] h-[5rem]"
+                        onClick={() => dispatch(changeSteps("increase"))}>
+                        <PlusCircleIcon />
+                    </button>
                 </span>
             </div>
         </div>
-        {/* <button className={styles.startBtn} onClick={() => handler(side, steps, setDifficulty)}>Начать</button> */}
-        <button className="rounded border-2 border-black w-20 my-3"
-        onClick={() => dispatch(gameOver(false))}>
+        <button className="rounded text-6xl border-[10px] border-black w-[100%] h-[6rem]  mt-[7rem]"
+            onClick={() => dispatch(gameOver(false))}>
             Начать
-            </button>
-            
-            
-            <div>
-            <ul className = "list-none hover:list-disc">Правила игры :</ul>
-            <li> Необходимо на поле , мысленно следуя инструкциям , передвигаться из клетки старта (отмеченая клетка) к финишу</li>
-            <li> После последней инструкции выбрать клетку финиш</li>
+        </button>
 
-            </div>
+
+        <div>
+            <ul className="flex items-center">Правила игры
+                <button onClick={() => setListVisible(!listVisible)} className="ml-2 w-4 h-4 "><ChevronDownIcon /></button></ul>
+            {listVisible ? <>
+                <li> Необходимо на поле , мысленно следуя инструкциям , передвигаться из клетки старта (отмеченая клетка) к финишу</li>
+                <li> После последней инструкции выбрать клетку финиш</li>
+            </> : <></>}
+
+        </div>
     </div>
 }
