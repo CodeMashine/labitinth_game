@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit' ;
 
 const initialState = {
     side: 3 ,
-    steps: 1 ,
+    steps: 3 ,
     isEnd:true,
     // isEnd:false,
 }

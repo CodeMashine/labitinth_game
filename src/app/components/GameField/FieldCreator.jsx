@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useState , useRef , useEffect } from "react";
 import { useDispatch } from "react-redux/es/exports";
 import { gameOver } from "../../slices/gameOptionSlice";
 import styles from "../../components/gameStyle.module.css";
-// import StartPage from "../StartPage/StartPage";
 
 
 export default function FieldCreator(props) {
-    const [data, setData] = useState(props.data);
-    const [listener , setListener] = useState(true) ;
-    
+    const [ data, setData ] = useState(props.data);
+    const [ listener , setListener ] = useState(true) ;
+    const [ clean , setClean ] = useState(false) ;
+    const timerRef = useRef() ;
+
+
+    useEffect(()=>{
+        return ()=>clearTimeout(timerRef.current) ;
+    } , [clean]);
+
+
     let setGameResult = props.setGameResult;
     
     const dispatch = useDispatch();
@@ -59,8 +66,9 @@ export default function FieldCreator(props) {
                         className={`${classList.join(' ')}`}
                             onClick = {listener ? () => {
                                     CheckResult(cell.num, data, setData , setGameResult );
-                                    setTimeout(() => {
+                                    timerRef.current = setTimeout(() => {
                                         dispatch(gameOver(true));
+                                        setClean((clean=>!clean)) ;
                                     }, 2000)
                                 }
                                 : null 

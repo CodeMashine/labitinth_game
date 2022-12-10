@@ -6,10 +6,8 @@ import { useSelector } from "react-redux" ;
 
 export default function App() {
   const isEnd = useSelector(state => state.gameOption.isEnd) ; 
-  // return (<div className = "flex flex-col items-center">
   return (<div className = "flex w-screen h-screen">
     { isEnd ? <StartPage/> :<GameField/> }
-
   </div>)
 }
 

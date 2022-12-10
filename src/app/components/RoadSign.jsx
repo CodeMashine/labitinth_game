@@ -1,97 +1,45 @@
-// import React, { useState , useEffect , useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
-// export default function RoadSign(props) {
-    
-//     const [counter, setCounter] = useState(1);
-    
-//     const [sign, setSign] = useState('ready');
+export default function RoadSign({ way, gameResult }) {
+  const [step, setStep] = useState(0);
 
-//     const gameResult = props.gameResult;
+  const signRef = useRef("ready");
 
+  const timerRef = useRef();
 
-//     useEffect(() => {
-        
-//     }) ;
+  useEffect(() => {
+    if (gameResult === "in Process") {
+      timerRef.current = setTimeout(() => {
+        setStep(step + 1);
+      }, 1000);
+    }
+    if (step === way.length) {
+      clearTimeout(timerRef.current);
+    }
 
-
-
-
-//     function waySign () {
- 
-//     if (gameResult === "in Process") {
-//         let way = props.way;
-//         setTimeout(() => {
-//             if (counter === way.length + 1) {
-//                 setSign("finish");
-//                 return;
-//             }
-//             setSign(`step ${counter} ${way[counter - 1]}`);
-//             setCounter(counter + 1);
-//         }, 1000);
-
-//         return sign ;
-//     } else {
-//         return gameResult ;
-
-//     }
-// }
-
-//     return  <div className = {`text-7xl font-extrabold mb-[2rem] `}>
-//         {waySign()}
-//     </div>
-// }
+    return () => {
+      clearTimeout(timerRef.current);
+    };
 
 
 
-
-import React, { useState , useEffect , useRef } from "react";
-
-export default function RoadSign( {way , gameResult} ) {
-    
-    const counterRef = useRef(1) ;
-
-    const timerRef = useRef('') ;
-
-    const clearTimeoutRef = useRef(false) ;
-    
-    const signRef = useRef('ready') ;
-
-    const [ sign , setSign ] = useState('ready') ;
-   
-    console.log(way[counterRef.current]) ;
-    
-    counterRef.current += 1 ;
-    
-    console.log(way[counterRef.current]) ;
-
-    useEffect ( () => {
-        if (counterRef.current <= way.length-1) {
-                timerRef.current = setTimeout(()=>{
-                if(counterRef.current === way.length-1){
-                    setSign(`finish`) ;
-                    return ;
-                }else{
-                    setSign(`step ${ counterRef.current } --- ${ way[counterRef.current - 1] }`) ;
-                }
-                
-                clearTimeoutRef.current = !clearTimeoutRef.current ;
-            } , 1000) ;
-        }else if ( gameResult !== 'in Process') {
-            setSign(gameResult) ;
-        }
-    } ) ;
-
-    useEffect(() => {
-        clearTimeout(clearTimeoutRef.current) ;
-    } , [clearTimeoutRef]) ;
+  }, [step, gameResult, way.length]);
 
 
-    return (
-        <div>
-            {sign}
-        </div>
-    )
+  if (step >= way.length) {
+    signRef.current = "finish";
+  } else {
+    signRef.current = `step ${step + 1} ${way[step]}`;
+  }
+  
+  if(gameResult !== 'in Process'){
+    signRef.current = gameResult ;
+  }
 
-
-   
+  
+  return (
+    <div>
+      {signRef.current}
+    </div>
+  );
 }
