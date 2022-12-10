@@ -20,18 +20,18 @@ export default function StartPage() {
   const [listVisible, setListVisible] = useState(false);
 
   return (
-    <div className="flex items-start flex-col mx-auto w-[80%] h-[60%] mt-10 ">
-      <h2 className="font-bold text-8xl font-sans tracking-widest">Лабиринт</h2>
+    <div className="flex items-start flex-col mx-auto w-[80%] h-[60%] mt-10 md:w-[60%] ">
+      <h2 className="font-bold text-8xl md:text-6xl font-sans tracking-widest">Лабиринт</h2>
 
       <div className="mt-[5rem]">
-        <h2 className="text-5xl font-sans tracking-widest underline">
+        <h2 className="text-5xl md:text-3xl font-sans tracking-widest underline">
           Задайте сложность игры
         </h2>
 
         <div className="mt-[3rem]">
           <span className="flex space-x-10 items-center">
             <span
-              className="cursor-help text-5xl"
+              className="cursor-help text-5xl md:text-3xl"
               title="(не менее 3 и не более 15)"
             >
               Сторона поля :
@@ -42,7 +42,7 @@ export default function StartPage() {
             >
               <MinusCircleIcon />
             </button>
-            <span className="text-5xl">{sideStore}</span>
+            <span className="text-5xl md:text-3xl">{sideStore}</span>
             <button
               className="rounded-full w-[5rem] h-[5rem]"
               onClick={() => dispatch(changeSide("increase"))}
@@ -54,7 +54,7 @@ export default function StartPage() {
         <div className="mt-[3rem]">
           <span className="flex space-x-10 items-center">
             <span
-              className="cursor-help text-5xl"
+              className="cursor-help text-5xl md:text-3xl"
               title="(не менее 1 и не более 15)"
             >
               Количество ходов :
@@ -65,7 +65,7 @@ export default function StartPage() {
             >
               <MinusCircleIcon />
             </button>
-            <span className="text-5xl">{stepsStore}</span>
+            <span className="text-5xl md:text-3xl">{stepsStore}</span>
             <button
               className="rounded-full w-[5rem] h-[5rem]"
               onClick={() => dispatch(changeSteps("increase"))}
@@ -76,29 +76,29 @@ export default function StartPage() {
         </div>
       </div>
       <button
-        className="rounded text-6xl border-[10px] border-black w-[100%] h-[6rem]  mt-[7rem]"
+        className="rounded text-6xl md:text-4xl border-[10px] border-black w-[100%] h-[6rem]  mt-[7rem] md:mt-[4rem]"
         onClick={() => dispatch(gameOver(false))}
       >
         Начать
       </button>
 
       <div>
-        <ul className="flex items-center text-4xl mt-[4rem]">
+        <ul className="flex items-center text-4xl md:text-3xl mt-[4rem]">
           Правила игры
           <button
             onClick={() => setListVisible(!listVisible)}
-            className="ml-2 w-4 h-4 "
+            className="ml-2 w-4 h-4"
           >
             <ChevronDownIcon />
           </button>
         </ul>
         {listVisible ? (
           <>
-            <li className="text-3xl">
+            <li className="text-3xl md:text-2xl">
               Необходимо на поле , мысленно следуя инструкциям , передвигаться
               из клетки старта (отмеченая клетка) к финишу
             </li>
-            <li className="text-3xl">
+            <li className="text-3xl md:text-2xl">
               После последней инструкции выбрать клетку финиш
             </li>
           </>
