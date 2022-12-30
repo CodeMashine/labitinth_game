@@ -9,7 +9,7 @@
 }
 
 .start {
-    background: url(../images/start-line-svgrepo-com.svg) no-repeat ;
+    background: url(../../images/start-line-svgrepo-com.svg) no-repeat ;
 }
 
 .chosen {
@@ -17,7 +17,7 @@
 }
 
 .show{
-    background: url(../images/finish-svgrepo-com.svg) no-repeat ;
+    background: url(../../images/finish-svgrepo-com.svg) no-repeat ;
 }
 
 

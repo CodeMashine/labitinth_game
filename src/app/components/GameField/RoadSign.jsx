@@ -38,7 +38,7 @@ export default function RoadSign({ way, gameResult }) {
 
   
   return (
-    <div>
+    <div className = "text-5xl mt-[4rem] font-bold">
       {signRef.current}
     </div>
   );

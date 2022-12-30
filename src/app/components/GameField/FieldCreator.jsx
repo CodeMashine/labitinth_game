@@ -1,7 +1,7 @@
 import React, { useState , useRef , useEffect } from "react";
 import { useDispatch } from "react-redux/es/exports";
 import { gameOver } from "../../slices/gameOptionSlice";
-import styles from "../../components/gameStyle.module.css";
+import styles from "./gameStyle.module.css";
 
 
 export default function FieldCreator(props) {
@@ -21,7 +21,7 @@ export default function FieldCreator(props) {
     const dispatch = useDispatch();
 
 
-    function CheckResult(num, data, setData , setGameResult = false) {   /// можно попытаться и сделать несколько попыток
+    function CheckResult(num, data, setData , setGameResult = false) {   
         let newData = Object.assign([], data);
 
         let result = newData.map(row => {
@@ -46,7 +46,7 @@ export default function FieldCreator(props) {
         const copy = Object.assign([], data);
         const stack = copy.flat();
         let result = stack.find(item => (item.isChoose === true&&item.isEnd===true));
-        result ? setGameResult("You Win") : setGameResult("You Lose") ;
+        setGameResult( result ? "You Win" : "You Lose" ) ;
     }
     
 
@@ -83,7 +83,7 @@ export default function FieldCreator(props) {
     </table>
 
     return (
-        <div className = {`w-[80%] h-[60%]`}>
+        <div className = {`w-[100%] h-[80%]`}>
             {table}
         </div>
 

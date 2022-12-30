@@ -53,7 +53,5 @@ export default function wayFinder(array, steps, side) {
         })
     })
     
-    // return way;
     return [ way , newArray ];
-    // return [ way , point.num ];
 }
