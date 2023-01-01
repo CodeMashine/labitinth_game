@@ -30,6 +30,7 @@ export default function StartPage() {
 
   const circleBtnClass = "rounded-full w-[5rem] h-[5rem] lg:w-[3rem] lg:h-[3rem]" ;
 
+  const buttonBlockClass = "flex mt-[3rem] justify-between items-center lg:mt-[1rem] lg:w-[60%] xl:w-[40%]" ;
 
   return (
     <div className="flex items-start flex-col mx-auto w-[100%] h-[100%] pt-[20rem] lg:pt-[2rem] ">
@@ -51,7 +52,7 @@ export default function StartPage() {
 
 
 {/* сторона поля */}
-          <div className="flex mt-[3rem] justify-between items-center lg:mt-[1rem] lg:w-[40%]">
+          <div className={buttonBlockClass}>
             <span
               className="cursor-help text-5xl lg:text-3xl"
               title="(не менее 3 и не более 15)"
@@ -79,7 +80,7 @@ export default function StartPage() {
         </div>
 
 {/* количество ходов */}
-<div className="flex mt-[3rem] justify-between  items-center lg:mt-[1rem] lg:w-[40%]">
+<div className={buttonBlockClass}>
             <span
               className="cursor-help text-5xl lg:text-3xl"
               title="(не менее 1 и не более 15)"

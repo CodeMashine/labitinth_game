@@ -1,5 +1,5 @@
 const displayWidth = () =>{
-    if (document.documentElement.clientWidth >= 1200 ) return true ;
+    if (document.documentElement.clientWidth >= 1024 ) return true ;
     return false ;
 }
 
