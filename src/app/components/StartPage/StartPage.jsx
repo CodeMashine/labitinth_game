@@ -36,9 +36,9 @@ export default function StartPage() {
       <div className = 'flex items-center w-[80%] justify-between lg:flex-col-reverse lg:mx-auto lg:w-full' >
         <h2 className="font-bold text-8xl font-sans tracking-widest lg:text-[7rem] lg:tracking-[4rem]">Лабиринт 
         </h2>
-        { moreThan1200? <SvgOut path={logo} h={200} w={200}/> 
+        { moreThan1200? <SvgOut path={logo} h={80} w={80}/> 
             
-            : <SvgOut className="lg:h-[10rem]" path={logo}/>  }
+            : <SvgOut className="lg:h-[10rem]" path={logo} w={80} h={80}/>  }
       </div>
 
 
